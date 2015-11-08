@@ -1,0 +1,31 @@
+{
+  "name": "chai-moment",
+  "version": "0.0.1",
+  "description": "date assertions for chai, powered by moment",
+  "main": "index.js",
+  "scripts": {
+    "lint": "node ./node_modules/eslint/bin/eslint.js api/ config/ fixtures/ grunt/ models/ public/js/ routes/ scripts/ services/ test/",
+    "coverage": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- test/**/*.spec.js -R spec",
+    "unittests": "node ./node_modules/mocha/bin/_mocha -R spec -- test/**/*.spec.js",
+    "test": "npm run coverage",
+    "pretest": "npm run lint"
+  },
+  "keywords": [
+    "chai",
+    "moment",
+    "test",
+    "assertions"
+  ],
+  "author": "Paul Marbach <paul@picardylearning.com>",
+  "license": "ISC",
+  "dependencies": {
+    "moment": "^2.10.6"
+  },
+  "devDependencies": {
+    "chai": ">=1.0.0",
+    "mocha": ">=1.0.0"
+  },
+  "peerDependencies": {
+    "chai": ">= 1.0.0"
+  }
+}
