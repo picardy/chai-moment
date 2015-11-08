@@ -37,9 +37,37 @@
     var objMoment = moment(obj)
     var expectedMoment = moment(expected)
     this.assert(
-      objMoment.isSame(expected, granularity)
-      , "expected " + objMoment.format('L') + " to be the same " granularity ? granularity + " " : "" + " as " + expectedMoment.format('L')
-      , "expected " + objMoment.format('L') + " not to be the same " granularity ? granularity + " " : "" + " as " + expectedMoment.format('L')
+      objMoment.isSame(expectedMoment, granularity)
+      , "expected " + objMoment.format('L') + " to be the same as " + expectedMoment.format('L') + (granularity ? " (granularity: " + granularity + ")" : "")
+      , "expected " + objMoment.format('L') + " not to be the same as " + expectedMoment.format('L') + (granularity ? " (granularity: " + granularity + ")" : "")
+      , expected
+      , obj
+      , true
+    )
+  });
+
+  chai.Assertion.addMethod('beforeMoment', function(expected, granularity) {
+    var obj = this._obj
+    var objMoment = moment(obj)
+    var expectedMoment = moment(expected)
+    this.assert(
+      objMoment.isBefore(expectedMoment, granularity)
+      , "expected " + objMoment.format('L') + " to be before " + expectedMoment.format('L') + (granularity ? " (granularity: " + granularity + ")" : "")
+      , "expected " + objMoment.format('L') + " not to be before " + expectedMoment.format('L') + (granularity ? " (granularity: " + granularity + ")" : "")
+      , expected
+      , obj
+      , true
+    )
+  });
+
+  chai.Assertion.addMethod('afterMoment', function(expected, granularity) {
+    var obj = this._obj
+    var objMoment = moment(obj)
+    var expectedMoment = moment(expected)
+    this.assert(
+      objMoment.isAfter(expectedMoment, granularity)
+      , "expected " + objMoment.format('L') + " to be after " + expectedMoment.format('L') + (granularity ? " (granularity: " + granularity + ")" : "")
+      , "expected " + objMoment.format('L') + " not to be after " + expectedMoment.format('L') + (granularity ? " (granularity: " + granularity + ")" : "")
       , expected
       , obj
       , true
@@ -50,6 +78,14 @@
   var assert = chai.assert;
 
   assert.sameMoment = function (val, exp, msg) {
+    new chai.Assertion(val, msg).to.be.sameMoment(exp);
+  };
+
+  assert.beforeMoment = function (val, exp, msg) {
+    new chai.Assertion(val, msg).to.be.sameMoment(exp);
+  };
+
+  assert.afterMoment = function (val, exp, msg) {
     new chai.Assertion(val, msg).to.be.sameMoment(exp);
   };
 }));
