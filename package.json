@@ -4,9 +4,8 @@
   "description": "date assertions for chai, powered by moment",
   "main": "index.js",
   "scripts": {
-    "lint": "node ./node_modules/eslint/bin/eslint.js api/ config/ fixtures/ grunt/ models/ public/js/ routes/ scripts/ services/ test/",
-    "coverage": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- test/**/*.spec.js -R spec",
-    "unittests": "node ./node_modules/mocha/bin/_mocha -R spec -- test/**/*.spec.js",
+    "lint": "node ./node_modules/eslint/bin/eslint.js index.js /test",
+    "coverage": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- test/**/*.js -R spec",
     "test": "npm run coverage",
     "pretest": "npm run lint"
   },
@@ -23,6 +22,8 @@
   },
   "devDependencies": {
     "chai": ">=1.0.0",
+    "eslint": "^2.8.0",
+    "istanbul": "^0.4.3",
     "mocha": ">=1.0.0"
   },
   "peerDependencies": {
