@@ -77,15 +77,26 @@
   //export tdd style
   var assert = chai.assert;
 
-  assert.sameMoment = function (val, exp, msg) {
-    new chai.Assertion(val, msg).to.be.sameMoment(exp);
+  var allowedGranularities = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second'],
+    allowedGranularitiesLookup = {};
+
+  allowedGranularities.forEach(function(type) {
+    allowedGranularitiesLookup[type] = true;
+  });
+
+  assert.sameMoment = function (val, exp, granularity, msg) {
+    if(!allowedGranularitiesLookup[granularity]) msg = granularity;
+    new chai.Assertion(val, msg).to.be.sameMoment(exp, granularity);
   };
 
-  assert.beforeMoment = function (val, exp, msg) {
-    new chai.Assertion(val, msg).to.be.sameMoment(exp);
+  assert.beforeMoment = function (val, exp, granularity, msg) {
+    if(!allowedGranularitiesLookup[granularity]) msg = granularity;
+    new chai.Assertion(val, msg).to.be.beforeMoment(exp, granularity);
   };
 
-  assert.afterMoment = function (val, exp, msg) {
-    new chai.Assertion(val, msg).to.be.sameMoment(exp);
+  assert.afterMoment = function (val, exp, granularity, msg) {
+    if(!allowedGranularitiesLookup[granularity]) msg = granularity;
+    new chai.Assertion(val, msg).to.be.afterMoment(exp, granularity);
   };
+  
 }));
