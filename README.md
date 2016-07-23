@@ -107,7 +107,22 @@ assert.afterMoment(oneDayLater, dateString, 'custom error message');
 
 ```
 
+## Configuration
 
+### setErrorFormat(format)
+
+Sets the [format](http://momentjs.com/docs/#/displaying/) used for reporting moments in failed assertions.
+
+```javascript
+
+var chaiMoment = require('chai-moment');
+
+chaiMoment.setErrorFormat('L');
+
+expect(moment('2016-04-21')).to.be.beforeMoment(moment('2016-04-22'));
+// Error('expected 04/21/2017 to be before 04/22/2016')
+
+```
 
 # Thanks
 
