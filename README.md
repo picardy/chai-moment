@@ -1,5 +1,7 @@
 # chai-moment
 
+[![Build Status](https://travis-ci.org/picardy/chai-moment.svg?branch=master)](https://travis-ci.org/picardy/chai-moment)
+
 Matchers for dates and formatted date strings powered by [moment.js](http://momentjs.com/)
 
 ## Using
@@ -22,7 +24,7 @@ have chai use chai-moment:
 
 var chai = require('chai');
 chai.use(require('chai-moment'));
-    
+
 ```
 
 ## Assertions
