@@ -1,18 +1,23 @@
 var chai = require('chai');
-chai.use(require('../index.js'));
+var chaiMoment = require('../index.js');
 
-var moment = require('moment')
+chai.use(chaiMoment);
+
+chaiMoment.setErrorFormat('LLLL');
+
+var moment = require('moment');
 
 chai.should();
 var assert = chai.assert;
 var expect = chai.expect;
 
 var dateString = '2016-04-21',
-    date = new Date(2016, 3, 21),
-    milliseconds = 1461222000000,  // assumes PDT timezone
-    obj = { y: 2016, M: 3, d: 21 },
+    momentObj = moment(dateString),
+    date = momentObj.toDate(),
+    milliseconds = momentObj.valueOf(),
+    obj = {y: 2016, M: 3, d: 21},
     arr = [2016, 3, 21],
-    momentObj = moment('2016-04-21'),
+
     allInputTypes = [dateString, date, milliseconds, obj, momentObj],
     oneDayLater = moment('2016-04-22'),
     oneDayBefore = moment('2016-04-20'),
@@ -28,7 +33,7 @@ describe('sameMoment', function() {
         val.should.be.sameMoment(dateString);
       });
     });
-    
+
   });
 
   describe('expect-style tests', function() {
@@ -39,7 +44,7 @@ describe('sameMoment', function() {
         expect(val).to.be.sameMoment(dateString);
       });
     });
-    
+
   });
 
   describe('tdd-style tests', function() {
@@ -50,7 +55,7 @@ describe('sameMoment', function() {
         assert.sameMoment(val, dateString);
       });
     });
-    
+
   });
 
   it('assertion should fail for non-same moment', function() {
@@ -169,4 +174,25 @@ describe('beforeMoment', function() {
 
   });
 
+});
+
+describe('chaiMoment.setErrorFormat', function() {
+  it('is a function', function() {
+    expect(chaiMoment.setErrorFormat).to.be.a.function;
+  });
+
+  it('sets the moment.format() call for an error', function() {
+    var testFormats = ['L', 'LLL', 'D', 'mm:ss'];
+
+    testFormats.forEach(function(format) {
+      chaiMoment.setErrorFormat(format);
+
+      function _errorThrower() {
+        assert.beforeMoment(oneYearLater, oneDayLater);
+      }
+
+      expect(_errorThrower).to.throw(oneYearLater.format(format));
+      expect(_errorThrower).to.throw(oneDayLater.format(format));
+    });
+  });
 });
