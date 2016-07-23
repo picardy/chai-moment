@@ -182,13 +182,17 @@ describe('chaiMoment.setErrorFormat', function() {
   });
 
   it('sets the moment.format() call for an error', function() {
-    chaiMoment.setErrorFormat('L');
+    var testFormats = ['L', 'LLL', 'D', 'mm:ss'];
 
-    function _errorThrower() {
-      assert.beforeMoment(oneYearLater, oneDayLater);
-    }
+    testFormats.forEach(function(format) {
+      chaiMoment.setErrorFormat(format);
 
-    expect(_errorThrower).to.throw(oneYearLater.format('LL'));
-    expect(_errorThrower).to.throw(oneDayLater.format('LL'));
+      function _errorThrower() {
+        assert.beforeMoment(oneYearLater, oneDayLater);
+      }
+
+      expect(_errorThrower).to.throw(oneYearLater.format(format));
+      expect(_errorThrower).to.throw(oneDayLater.format(format));
+    });
   });
 });
