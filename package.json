@@ -1,6 +1,6 @@
 {
   "name": "chai-moment",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "date assertions for chai, powered by moment",
   "main": "index.js",
   "scripts": {
