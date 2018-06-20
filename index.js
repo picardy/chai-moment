@@ -68,17 +68,26 @@ function _chaiMoment(chai, utils){
   });
 
   assert.sameMoment = function (val, exp, granularity, msg) {
-    if(!allowedGranularitiesLookup[granularity]) msg = granularity;
+    if(!allowedGranularitiesLookup[granularity]) {
+      msg = granularity;
+      granularity = undefined;
+    }
     new chai.Assertion(val, msg).to.be.sameMoment(exp, granularity);
   };
 
   assert.beforeMoment = function (val, exp, granularity, msg) {
-    if(!allowedGranularitiesLookup[granularity]) msg = granularity;
+    if(!allowedGranularitiesLookup[granularity]) {
+      msg = granularity;
+      granularity = undefined;
+    }
     new chai.Assertion(val, msg).to.be.beforeMoment(exp, granularity);
   };
 
   assert.afterMoment = function (val, exp, granularity, msg) {
-    if(!allowedGranularitiesLookup[granularity]) msg = granularity;
+    if(!allowedGranularitiesLookup[granularity]) {
+      msg = granularity;
+      granularity = undefined;
+    }
     new chai.Assertion(val, msg).to.be.afterMoment(exp, granularity);
   };
 }

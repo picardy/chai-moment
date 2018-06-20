@@ -3,7 +3,7 @@ var chaiMoment = require('../index.js');
 
 chai.use(chaiMoment);
 
-chaiMoment.setErrorFormat('LLLL');
+chaiMoment.setErrorFormat('YYYYMMDDHHmmss');
 
 var moment = require('moment');
 
@@ -78,10 +78,16 @@ describe('sameMoment', function() {
       assert.sameMoment(date, oneDayLater, 'month');
     });
 
+    it('tdd-style with error message', function() {
+      assert.throws(function() {
+        assert.sameMoment(date, oneDayLater, 'day', 'not the same day');
+      }, /^not the same day: expected \d{14} to be the same as \d{14} \(granularity: day\)$/);
+    });
+
     it('tdd-style with error message in place of granularity should raise error', function() {
       assert.throws(function() {
         assert.sameMoment(date, oneDayLater, 'moments are not the same');
-      }, 'moments are not the same');
+      }, /^moments are not the same: expected \d{14} to be the same as \d{14}$/);
     });
 
   })
@@ -122,10 +128,16 @@ describe('afterMoment', function() {
       assert.afterMoment(oneYearLater, date, 'month');
     });
 
+    it('tdd-style with error message', function() {
+      assert.throws(function() {
+        assert.afterMoment(date, obj, 'second', 'not after second granularity');
+      }, /^not after second granularity: expected \d{14} to be after \d{14} \(granularity: second\)$/);
+    });
+
     it('tdd-style with error message in place of granularity should raise error', function() {
       assert.throws(function() {
         assert.afterMoment(date, obj, 'moment is not after expected');
-      }, 'moment is not after expected');
+      }, /^moment is not after expected: expected \d{14} to be after \d{14}$/);
     });
 
   });
@@ -168,8 +180,14 @@ describe('beforeMoment', function() {
 
     it('tdd-style with error message in place of granularity should raise error', function() {
       assert.throws(function() {
+        assert.beforeMoment(date, obj, 'second', 'not before second granularity');
+      }, /^not before second granularity: expected \d{14} to be before \d{14} \(granularity: second\)$/);
+    });
+
+    it('tdd-style with error message in place of granularity should raise error', function() {
+      assert.throws(function() {
         assert.beforeMoment(date, obj, 'moment is not before expected');
-      }, 'moment is not before expected');
+      }, /^moment is not before expected: expected \d{14} to be before \d{14}$/);
     });
 
   });
