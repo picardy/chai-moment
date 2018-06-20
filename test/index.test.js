@@ -196,7 +196,7 @@ describe('beforeMoment', function() {
 
 describe('chaiMoment.setErrorFormat', function() {
   it('is a function', function() {
-    expect(chaiMoment.setErrorFormat).to.be.a.function;
+    expect(chaiMoment.setErrorFormat).to.be.a('function');
   });
 
   it('sets the moment.format() call for an error', function() {
